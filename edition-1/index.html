@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Does the Official Code-Review Plugin Still Help? | Side of My Desk Research</title>
+<meta name="description" content="A first look at Anthropic's official code-review plugin for Claude Code, compared with a simple request, on 15 real pull requests and two current AI models. Without the plugin, each model found about twice as many known mistakes.">
+<link rel="canonical" href="https://research.sideofmydesk.com/edition-1/">
+<meta property="og:title" content="Does the Official Code-Review Plugin Still Help?">
+<meta property="og:description" content="On 15 real pull requests and two current AI models, a one-paragraph request found about twice as many known mistakes as the official plugin, for less money.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://research.sideofmydesk.com/edition-1/">
+<meta property="og:image" content="https://research.sideofmydesk.com/edition-1/figures/fig-01-recall.png">
+<!-- Google Scholar -->
+<meta name="citation_title" content="Does the Official Code-Review Plugin Still Help? A First Look, Comparing It with a Simple Request on Two New AI Models">
+<meta name="citation_author" content="Michel, Ian J">
+<meta name="citation_publication_date" content="2026/11/18">
+<meta name="citation_technical_report_institution" content="Side of My Desk LLC">
+<meta name="citation_technical_report_number" content="Research Edition 1">
+<meta name="citation_pdf_url" content="https://research.sideofmydesk.com/edition-1/michel-2026-code-review-plugin.pdf">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Crect width='28' height='28' rx='6' fill='%232c6a4d'/%3E%3Crect x='4' y='15' width='20' height='3' rx='1.5' fill='%23fff'/%3E%3Crect x='14' y='6' width='8' height='9' rx='1' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="alternate" type="application/atom+xml" title="Side of My Desk Research" href="/feed.xml">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "headline": "Does the Official Code-Review Plugin Still Help? A First Look, Comparing It with a Simple Request on Two New AI Models",
+  "author": {"@type": "Person", "name": "Ian J Michel", "email": "research@sideofmydesk.com", "affiliation": {"@type": "Organization", "name": "Side of My Desk LLC"}},
+  "datePublished": "2026-11-18",
+  "publisher": {"@type": "Organization", "name": "Side of My Desk LLC", "url": "https://sideofmydesk.com/"},
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "url": "https://research.sideofmydesk.com/edition-1/",
+  "encoding": {"@type": "MediaObject", "contentUrl": "https://research.sideofmydesk.com/edition-1/michel-2026-code-review-plugin.pdf", "encodingFormat": "application/pdf"}
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="mark" href="/" aria-label="Side of My Desk Research, home">
+      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true" focusable="false"><rect x="2" y="15" width="24" height="3" rx="1.5" fill="currentColor"/><rect x="5" y="18" width="2.5" height="8" rx="1" fill="currentColor"/><rect x="20.5" y="18" width="2.5" height="8" rx="1" fill="currentColor"/><rect x="14" y="5" width="9" height="10" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16.5 8.5h4M16.5 11.5h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      Side of My Desk <span>Research</span>
+    </a>
+    <a class="head-link" href="/">All editions</a>
+  </div>
+</header>
+
+<main id="main">
+  <article class="wrap">
+    <div class="intro col">
+      <p class="eyebrow">Research Edition 1</p>
+      <h1>Does the Official Code-Review Plugin Still Help?</h1>
+      <p class="lede">A first look, comparing it with a simple request on two new AI models.</p>
+      <p class="meta-line">Ian J Michel &middot; Side of My Desk LLC &middot; 18 November 2026 &middot; Version 1.0</p>
+      <div class="actions">
+        <a class="btn" href="michel-2026-code-review-plugin.pdf">Read the full paper (PDF)</a>
+        <a href="https://github.com/sideofmydesk/frontier-eval">Code and results</a>
+      </div>
+    </div>
+
+    <ul class="keys" aria-label="Headline numbers">
+      <li><div class="num">2&times;</div><div class="what">as many known mistakes found without the plugin, on both models</div></li>
+      <li><div class="num">0 of 15</div><div class="what">code changes where the plugin found more known mistakes than a simple request</div></li>
+      <li><div class="num">1.5&times;</div><div class="what">what a plugin review cost, compared with a simple request</div></li>
+      <li><div class="num">123</div><div class="what">separate mistakes the AI reported that the test set does not list, judged real by a second AI</div></li>
+    </ul>
+
+    <div class="col">
+      <h2>Summary</h2>
+      <p>AI coding tools can be given add-ons called plugins. A plugin is a set of written steps that tells the AI how to do a job. The steps are written for the AI models of the day. Then a newer model comes out, and few people check whether the steps still help.</p>
+      <p>This paper checks one well-known plugin: the official code-review plugin for Claude Code, made by Anthropic. We gave the AI 15 real code changes to check for mistakes. Each change was checked two ways: with the plugin, and with a simple one-paragraph request. We did this on two models, Claude Opus 5.5 and Claude Fable 5.2, twice each. That made 120 reviews. We kept a record of which model answered every request.</p>
+      <p>Without the plugin, each model found about twice as many of the known mistakes. It found 66% against 31% on Opus 5.5, and 73% against 32% on Fable 5.2. The plugin said much less. A bigger share of what it said matched a known mistake, and it cost about one and a half times as much. On none of the 15 code changes did the plugin find more of the known mistakes than the simple request.</p>
+      <p>The plugin&rsquo;s one advantage was smaller on the newer model. The plugin also picks its own models for its helpers. So on the newer model, the checking was still done by the older one. And the older model skipped the plugin&rsquo;s team process in 13 of 30 reviews. Those reviews cost a third as much and did about as well.</p>
+      <p>We also looked at the 543 things the AI reported that were not on the list of known mistakes. A second AI judged 285 of them to be real. They come to 123 separate mistakes the list does not have.</p>
+
+      <div class="note">
+        <p><strong>Read this as a first look.</strong> It is a small study. The test set is public, an AI did the grading, and we did not set pass marks ahead of time. No person checked the grading. The results call for a bigger study. They are not a final verdict on the plugin.</p>
+      </div>
+    </div>
+
+    <div class="col"><h2>The main result</h2>
+      <p>Each model was asked to review the same code changes with the plugin and without it. The bars show how much of the list of known mistakes each review found.</p></div>
+    <figure>
+      <img src="figures/fig-01-recall.png" alt="Bar chart. Share of known mistakes found. Claude Opus 5.5: 31 percent with the plugin, 66 percent without. Claude Fable 5.2: 32 percent with the plugin, 73 percent without." width="2944" height="1120" loading="lazy">
+      <figcaption>Share of known mistakes found. The thin lines show the range we are 95% sure about.</figcaption>
+    </figure>
+
+    <div class="col"><h2>What the plugin is good at</h2>
+      <p>The plugin reports far less. More of what it reports is on the list of known mistakes.</p></div>
+    <figure>
+      <img src="figures/fig-05-volume.png" alt="Bar chart of average findings per review. With the plugin: about 2 on both models. Without: 11.3 on Opus 5.5 and 10.1 on Fable 5.2. In every case the larger part did not match a known mistake." width="2944" height="1120" loading="lazy">
+      <figcaption>Average findings per review. The dark part matched a known mistake. The light part did not, though about half of those were judged real when checked.</figcaption>
+    </figure>
+
+    <div class="col"><h2>The idea we set out to test</h2>
+      <p>The idea was that <strong>plugins age badly</strong>: steps written for an older model help less on a newer one. Fable 5.2 came out after the plugin&rsquo;s current steps were written, so the plugin should help less there.</p>
+      <p>The result is half and half. On the share of findings that matched, the plugin&rsquo;s lead was clearly smaller on the newer model. On the share of known mistakes found, the difference could be chance. The idea got some support. It is not proven.</p></div>
+    <figure>
+      <img src="figures/fig-04-hypothesis.png" alt="Chart with two rows. Match rate: the plugin's effect was 15 points lower on Fable 5.2 than on Opus 5.5, and the range does not cross zero. Known issues found: 6 points lower, and the range crosses zero." width="2944" height="1120" loading="lazy">
+      <figcaption>The plugin&rsquo;s effect on Fable 5.2 minus its effect on Opus 5.5. A dot left of the line supports the idea.</figcaption>
+    </figure>
+
+    <div class="col"><h2>The plugin picks its own models</h2>
+      <p>The plugin names a model for each of its helpers. When we chose the newer model, the bug hunting was still done by the older one. Moving up to a newer model did not give us a newer review.</p></div>
+    <figure>
+      <img src="figures/fig-06-cost.png" alt="Bar chart of cost per review by model. With the plugin on a Fable 5.2 session, 91 cents went to Fable 5.2 and 75 cents to Opus 5.5." width="2944" height="1120" loading="lazy">
+      <figcaption>Estimated cost per review in US dollars, split by the model that did the work.</figcaption>
+    </figure>
+
+    <div class="col"><h2>The older model often skipped the plugin&rsquo;s process</h2>
+      <p>The plugin tells the AI to hand work to a team of helpers. Opus 5.5 did not do that in 13 of its 30 plugin reviews. It did the review alone, did about as well, and cost a third as much.</p></div>
+    <figure>
+      <img src="figures/fig-07-delegation.png" alt="Bar chart. Claude Opus 5.5 started helpers in 57 percent of plugin reviews and did the review itself in 43 percent. Claude Fable 5.2 started helpers in 100 percent." width="2944" height="1120" loading="lazy">
+      <figcaption>Share of plugin reviews in which the AI started the helpers the plugin asks for.</figcaption>
+    </figure>
+
+    <div class="col"><h2>Mistakes that were not on the list</h2>
+      <p>The test set lists 53 known mistakes in these 15 code changes. The reviews reported many things that were not on that list. A second AI went through all 543 of them and judged 285 to be real. Counting each mistake once gives 123.</p></div>
+    <figure>
+      <img src="figures/fig-12-new-issues.png" alt="Bar chart. The test set lists 53 mistakes. A further 123 separate mistakes were judged real: 99 found only without the plugin, 19 found by both, 5 found only with the plugin." width="2944" height="1120" loading="lazy">
+      <figcaption>Mistakes on the test set&rsquo;s list, and separate mistakes not on it that were judged real. These judgements are one AI&rsquo;s opinion and were not checked by a person.</figcaption>
+    </figure>
+
+    <div class="col end">
+      <h2>What to do with this</h2>
+      <ul>
+        <li><strong>Read a plugin before you depend on it.</strong> This one picks its own models, covers less than its name suggests, and has a help page for an older design.</li>
+        <li><strong>Keep a record of which model answers each request</strong> if you want to say what a model did or what it cost.</li>
+        <li><strong>Set the effort level yourself</strong> when you compare models. The two here have different defaults.</li>
+        <li><strong>Test your instructions again when the model changes.</strong> Here that cost about $136.</li>
+      </ul>
+
+      <h2>Read more</h2>
+      <ul>
+        <li><a href="michel-2026-code-review-plugin.pdf">The full paper (PDF)</a>, with every table, all twelve charts, the limits, and the earlier work it builds on</li>
+        <li><a href="https://github.com/sideofmydesk/frontier-eval">Code and results</a>: the testing programs and the data for every review</li>
+        <li><a href="https://github.com/sideofmydesk/frontier-eval/wiki">How the test works</a>: the method, with a page for engineers and a page for people who study AI testing</li>
+      </ul>
+
+      <h2>Cite this</h2>
+      <pre>@techreport{michel2026codereviewplugin,
+  author      = {Michel, Ian J},
+  title       = {Does the Official Code-Review Plugin Still Help? A First Look,
+                 Comparing It with a Simple Request on Two New AI Models},
+  institution = {Side of My Desk LLC},
+  number      = {Research Edition 1},
+  year        = {2026},
+  month       = nov,
+  url         = {https://research.sideofmydesk.com/edition-1/}
+}</pre>
+
+      <h2>About this work</h2>
+      <p class="fine">This study was done with a great deal of help from Claude Code, Anthropic&rsquo;s AI coding tool. Under the author&rsquo;s direction it wrote the testing programs, ran the reviews, did the analysis, and drafted the paper and this page. The author made the design choices and is responsible for what they say. The tool tested, the models that graded it, and the assistant that helped are all Claude models from one company.</p>
+      <p class="fine">The reviews cost about $136, paid from promotional credits that came with the author&rsquo;s Anthropic subscription. The author has no other financial tie to Anthropic. Anthropic had no part in this work.</p>
+      <p class="fine">Questions and corrections: <a href="mailto:research@sideofmydesk.com">research@sideofmydesk.com</a>. Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p>
+    </div>
+  </article>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <span>&copy; 2026 Side of My Desk LLC, Connecticut &middot; <a href="https://sideofmydesk.com/">sideofmydesk.com</a></span>
+    <span>No tracking or cookies on this site.</span>
+  </div>
+</footer>
+</body>
+</html>

@@ -2,26 +2,61 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Side of My Desk Research</title>
-<meta name="description" content="Research from Side of My Desk. First edition coming shortly.">
-<meta name="robots" content="noindex">
-<style>
-  :root { color-scheme: light dark; --bg:#f5f7f3; --ink:#1b2822; --muted:#4c5a53; --accent:#2c6a4d; }
-  @media (prefers-color-scheme: dark) { :root { --bg:#111814; --ink:#e6ede8; --muted:#a5b3ab; --accent:#7fc4a1; } }
-  body { margin:0; min-height:100vh; display:grid; place-items:center; background:var(--bg); color:var(--ink);
-         font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; padding:24px; }
-  main { max-width:34rem; }
-  h1 { font-size:1.75rem; margin:0 0 .5rem; }
-  p { color:var(--muted); line-height:1.6; margin:.5rem 0; }
-  a { color:var(--accent); }
-</style>
+<meta name="description" content="Research Editions from Side of My Desk: small, repeatable tests of the AI tools engineering teams rely on, with the method, the data and the limits published alongside the results.">
+<link rel="canonical" href="https://research.sideofmydesk.com/">
+<meta property="og:title" content="Side of My Desk Research">
+<meta property="og:description" content="Small, repeatable tests of the AI tools engineering teams rely on.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://research.sideofmydesk.com/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Crect width='28' height='28' rx='6' fill='%232c6a4d'/%3E%3Crect x='4' y='15' width='20' height='3' rx='1.5' fill='%23fff'/%3E%3Crect x='14' y='6' width='8' height='9' rx='1' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="alternate" type="application/atom+xml" title="Side of My Desk Research" href="/feed.xml">
+<link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<main>
-  <h1>Side of My Desk Research</h1>
-  <p>The first Research Edition is being prepared and will be published here shortly.</p>
-  <p><a href="https://sideofmydesk.com">sideofmydesk.com</a></p>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="mark" href="/" aria-label="Side of My Desk Research, home">
+      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true" focusable="false"><rect x="2" y="15" width="24" height="3" rx="1.5" fill="currentColor"/><rect x="5" y="18" width="2.5" height="8" rx="1" fill="currentColor"/><rect x="20.5" y="18" width="2.5" height="8" rx="1" fill="currentColor"/><rect x="14" y="5" width="9" height="10" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16.5 8.5h4M16.5 11.5h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      Side of My Desk <span>Research</span>
+    </a>
+    <a class="head-link" href="https://sideofmydesk.com/">sideofmydesk.com</a>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <div class="intro col">
+      <h1>Independent tests of the AI tools engineering teams rely on.</h1>
+      <p class="lede">Each Research Edition is a small test you could run again yourself. The method, the data and the limits are published with the results.</p>
+    </div>
+
+    <ul class="editions col" aria-label="Research Editions, newest first">
+      <li>
+        <a class="edition" href="/edition-1/">
+          <p class="eyebrow">Research Edition 1 &middot; 18 November 2026</p>
+          <h2 style="margin-top:0">Does the Official Code-Review Plugin Still Help?</h2>
+          <p>We tested Anthropic&rsquo;s official code-review plugin for Claude Code against a simple one-paragraph request, on 15 real code changes and two current AI models. Without the plugin, each model found about twice as many known mistakes, for less money.</p>
+          <p class="meta">Summary, charts and the full paper &rarr;</p>
+        </a>
+      </li>
+    </ul>
+
+    <div class="col end">
+      <h2 style="margin-top:0">About</h2>
+      <p>Side of My Desk Research is written by Ian J Michel, a software engineer with more than twenty years of experience. The studies are done with a great deal of help from AI tools, and each one says exactly how.</p>
+      <p>Questions and corrections are welcome at <a href="mailto:research@sideofmydesk.com">research@sideofmydesk.com</a>. New editions are listed in the <a href="/feed.xml">feed</a>.</p>
+    </div>
+  </div>
 </main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <span>&copy; 2026 Side of My Desk LLC, Connecticut &middot; <a href="https://sideofmydesk.com/">sideofmydesk.com</a></span>
+    <span>No tracking or cookies on this site.</span>
+  </div>
+</footer>
 </body>
 </html>

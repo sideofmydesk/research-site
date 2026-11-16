@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Side of My Desk Research</title>
+  <subtitle>Small, repeatable tests of the AI tools engineering teams rely on.</subtitle>
+  <link href="https://research.sideofmydesk.com/feed.xml" rel="self"/>
+  <link href="https://research.sideofmydesk.com/"/>
+  <id>https://research.sideofmydesk.com/</id>
+  <updated>2026-11-18T12:00:00Z</updated>
+  <author>
+    <name>Ian J Michel</name>
+    <email>research@sideofmydesk.com</email>
+  </author>
+  <entry>
+    <title>Research Edition 1: Does the Official Code-Review Plugin Still Help?</title>
+    <link href="https://research.sideofmydesk.com/edition-1/"/>
+    <id>https://research.sideofmydesk.com/edition-1/</id>
+    <published>2026-11-18T12:00:00Z</published>
+    <updated>2026-11-18T12:00:00Z</updated>
+    <summary>We tested Anthropic's official code-review plugin for Claude Code against a simple one-paragraph request, on 15 real code changes and two current AI models. Without the plugin, each model found about twice as many known mistakes, for less money.</summary>
+  </entry>
+</feed>
